@@ -15,16 +15,13 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 
 add_library(${PROJECT_NAME} STATIC ${SOURCES})
 add_library(libs::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
+
 target_link_libraries(${PROJECT_NAME} PUBLIC "${OpenCV_LIBS}" "${TORCH_LIBRARIES}")
 
 target_include_directories(${PROJECT_NAME}
         PUBLIC
-        $<INSTALL_INTERFACE:includes>
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/includes>
+        $<INSTALL_INTERFACE:inc>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc>
         ${CMAKE_CURRENT_SOURCE_DIR})
-
-target_include_directories(${PROJECT_NAME}
-        PUBLIC
-        ${CMAKE_SOURCE_DIR}/libs/waternet/inc)
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
